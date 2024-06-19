@@ -12,9 +12,7 @@ Route::post('/productos', [productoController::class, 'store']);
 Route::get('/productos', [productoController::class, 'index']);
 
 //Read
-Route::get('/productos/{id}', function () {
-    return 'Ver producto';
-});
+Route::get('/productos/{CodigoProducto}', [productoController::class, 'show']);
 
 //Update
 Route::put('/productos/{id}', function () {

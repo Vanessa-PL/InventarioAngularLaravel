@@ -23,6 +23,32 @@ class productoController extends Controller
         return response()->json($data, 200);
     }
 
+    //Leer un producto
+    public function show($CodigoProducto){
+
+        $producto = Producto::where('CodigoProducto', $CodigoProducto)->first();
+        // $producto = Producto::find($CodigoProducto);
+
+        if(!$producto) {
+
+            $data = [
+                'mesagge' => 'Producto no encontrado',
+                'status' => 404
+            ];
+
+            return response()->json($data, 404);
+
+        }
+
+        $data = [
+            'Producto' => $producto,
+            "status" => 200
+        ];
+
+        return response()->json($data, 200);
+
+    }
+
     //Crear productos
     public function store(Request $request){
 
@@ -67,5 +93,6 @@ class productoController extends Controller
         return response()->json($data, 201);
 
     }
+
 
 }
