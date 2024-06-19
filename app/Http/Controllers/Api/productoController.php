@@ -94,5 +94,31 @@ class productoController extends Controller
 
     }
 
+    public function destroy($CodigoProducto){
+
+        $producto = Producto::where('CodigoProducto', $CodigoProducto)->first();
+        // $producto = Producto::find($CodigoProducto);
+
+        if(!$producto) {
+
+            $data = [
+                'mesagge' => 'Producto no encontrado',
+                'status' => 404
+            ];
+
+            return response()->json($data, 404);
+
+        }
+
+        $producto->delete();
+
+        $data = [
+            'message' => "Producto eliminado",
+            'ststus' => 200
+        ];
+
+        return response()->json($data, 200);
+
+    }
 
 }

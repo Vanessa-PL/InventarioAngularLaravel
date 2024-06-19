@@ -20,6 +20,4 @@ Route::put('/productos/{id}', function () {
 });
 
 //Delete
-Route::delete('/productos/{id}', function () {
-    return 'Eliminar productos';
-});
+Route::delete('/productos/{CodigoProducto}', [productoController::class, 'destroy']);
