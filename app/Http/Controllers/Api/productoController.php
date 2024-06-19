@@ -94,6 +94,8 @@ class productoController extends Controller
 
     }
 
+
+    //Eliminar producto
     public function destroy($CodigoProducto){
 
         $producto = Producto::where('CodigoProducto', $CodigoProducto)->first();
@@ -120,5 +122,107 @@ class productoController extends Controller
         return response()->json($data, 200);
 
     }
+
+
+    //Actualizar productos
+    public function update(Request $request, $CodigoProducto){
+
+        $producto = Producto::where('CodigoProducto', $CodigoProducto)->first();
+
+        $validator =  Validator::make($request->all(),[
+            'CodigoProducto' => 'required|unique:productos',
+            'Nombre' => 'required|max:255',
+            'Cantidad' => 'required|numeric|max:999999',
+            'PrecioUnitario' => 'required|numeric|max:99999999',
+            'Total' => 'required'  
+        ]);
+
+        if ($validator->fails()) {
+            $data = [
+                'message' => 'Error en la validacion de los datos',
+                'errors' => $validator->errors(),
+                'status' => 400
+            ];
+            return response()->json($data, 400);
+        }
+
+        $producto->CodigoProducto = $request->CodigoProducto;
+        $producto->Nombre = $request->Nombre;
+        $producto->Cantidad = $request->Cantidad;
+        $producto->PrecioUnitario = $request->PrecioUnitario;
+        $producto->Total = $request->Total;
+
+        $producto->save;
+
+        $data = [
+            'message' => 'Producto actualizado',
+            'producto' => $producto,
+            'status' => 200
+        ];
+
+        return response()->json($data, 200);
+
+    }
+
+    //Actualizar parcialmente los productos
+    public function updatePartial(Request $request, $CodigoProducto) {
+        $producto = Producto::where('CodigoProducto', $CodigoProducto)->first();
+    
+        if (!$producto) {
+            $data = [
+                'message' => 'Producto no encontrado',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+    
+        $validator = Validator::make($request->all(), [
+            'CodigoProducto' => 'unique:productos',
+            'Nombre' => 'max:255',
+            'Cantidad' => 'numeric|min:0|max:999999',
+            'PrecioUnitario' => 'numeric|min:0|max:99999999',
+            'Total' => 'numeric|min:0'
+        ]);
+    
+        if ($validator->fails()) {
+            $data = [
+                'message' => 'Error en la validación de los datos',
+                'errors' => $validator->errors(),
+                'status' => 400
+            ];
+            return response()->json($data, 400);
+        }
+    
+        if ($request->has('CodigoProducto')) {
+            $producto->CodigoProducto = $request->CodigoProducto;
+        }
+    
+        if ($request->has('Nombre')) {
+            $producto->Nombre = $request->Nombre;
+        }
+    
+        if ($request->has('Cantidad')) {
+            $producto->Cantidad = $request->Cantidad;
+        }
+    
+        if ($request->has('PrecioUnitario')) {
+            $producto->PrecioUnitario = $request->PrecioUnitario;
+        }
+    
+        if ($request->has('Total')) {
+            $producto->Total = $request->Total;
+        }
+    
+        $producto->save();
+    
+        $data = [
+            'message' => 'Producto actualizado',
+            'producto' => $producto,
+            'status' => 200
+        ];
+    
+        return response()->json($data, 200);
+    }
+    
 
 }

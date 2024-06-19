@@ -15,9 +15,10 @@ Route::get('/productos', [productoController::class, 'index']);
 Route::get('/productos/{CodigoProducto}', [productoController::class, 'show']);
 
 //Update
-Route::put('/productos/{id}', function () {
-    return 'Actualizar productos';
-});
+Route::put('/productos/{CodigoProducto}', [productoController::class, 'update']);
+
+//Update
+Route::patch('/productos/{CodigoProducto}', [productoController::class, 'updatePartial']);
 
 //Delete
 Route::delete('/productos/{CodigoProducto}', [productoController::class, 'destroy']);
