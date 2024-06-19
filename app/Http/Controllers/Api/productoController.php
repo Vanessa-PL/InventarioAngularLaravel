@@ -23,4 +23,49 @@ class productoController extends Controller
         return response()->json($data, 200);
     }
 
+    //Crear productos
+    public function store(Request $request){
+
+        $validator =  Validator::make($request->all(),[
+            'CodigoProducto' => 'required|unique:productos',
+            'Nombre' => 'required|max:255',
+            'Cantidad' => 'required|numeric|max:999999',
+            'PrecioUnitario' => 'required|numeric|max:99999999',
+            'Total' => 'required'  
+        ]);
+
+        if ($validator->fails()) {
+            $data = [
+                'message' => 'Error en la validacion de los datos',
+                'errors' => $validator->errors(),
+                'status' => 400
+            ];
+            return response()->json($data, 400);
+        }
+
+        $producto = Producto::create([
+            'CodigoProducto' => $request->CodigoProducto,
+            'Nombre' => $request->Nombre,
+            'Cantidad' => $request->Cantidad,
+            'PrecioUnitario' => $request->PrecioUnitario,
+            'Total' => $request->Total  
+        ]);
+
+        if (!$producto){
+            $data = [
+                'menssage' => "Error al crear el producto",
+                'status' => 500
+            ];
+            return response()->json($data, 500);
+        }
+
+        $data = [
+            'producto' => $producto,
+            'status' => 201
+        ];
+
+        return response()->json($data, 201);
+
+    }
+
 }
