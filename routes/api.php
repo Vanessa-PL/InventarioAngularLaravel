@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\productoController;
+use App\Http\Controllers\Api\productoController;
 
 //Create
 Route::post('/productos', function () {
