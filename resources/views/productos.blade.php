@@ -39,49 +39,58 @@
 
     <!-- Formulario para agregar un nuevo producto -->
     <div id="create-form-modal" class="modal">
-        <h2>Agregar nuevo producto</h2>
         <form id="create-product-form">
-            <label for="create-CodigoProducto">Codigo de Producto:</label>
-            <input type="text" id="create-CodigoProducto" name="CodigoProducto" required><br><br>
+            <h2>Crear producto</h2>
+            <div class="input-group">
+                <label for="create-CodigoProducto">Codigo de Producto:</label>
+                <input type="text" id="create-CodigoProducto" name="CodigoProducto" required><br><br>
 
-            <label for="create-Nombre">Nombre:</label>
-            <input type="text" id="create-Nombre" name="Nombre" required><br><br>
+                <label for="create-Nombre">Nombre:</label>
+                <input type="text" id="create-Nombre" name="Nombre" required><br><br>
 
-            <label for="create-Cantidad">Cantidad:</label>
-            <input type="number" id="create-Cantidad" name="Cantidad" required><br><br>
+                <label for="create-Cantidad">Cantidad:</label>
+                <input type="number" id="create-Cantidad" name="Cantidad" required><br><br>
 
-            <label for="create-PrecioUnitario">Precio Unitario:</label>
-            <input type="number" id="create-PrecioUnitario" name="PrecioUnitario" required><br><br>
+                <label for="create-PrecioUnitario">Precio Unitario:</label>
+                <input type="number" id="create-PrecioUnitario" name="PrecioUnitario" required><br><br>
 
-            <label for="create-Total">Total:</label>
-            <input type="number" id="create-Total" name="Total" required><br><br>
+                <label for="create-Total">Total:</label>
+                <input type="number" id="create-Total" name="Total" required><br><br>
 
-            <button type="submit">Guardar</button>
-            <button type="button" onclick="toggleModal('create-form-modal')">Cancelar</button>
+                <div class="envio">
+                    <button type="submit">Guardar</button>
+                    <button type="button" onclick="toggleModal('create-form-modal')">Cancelar</button>
+                </div>
+            </div>
         </form>
     </div>
 
     <!-- Formulario para actualizar un producto -->
     <div id="update-form-modal" class="modal">
-        <h2>Actualizar producto</h2>
         <form id="update-product-form"
             onsubmit="event.preventDefault(); actualizarProducto(document.getElementById('update-CodigoProducto').value);">
-            <input type="hidden" id="update-CodigoProducto" name="CodigoProducto" required><br><br>
+            <h2>Actualizar producto</h2>
 
-            <label for="update-Nombre">Nombre:</label>
-            <input type="text" id="update-Nombre" name="Nombre" required><br><br>
+            <div class="input-group">
+                <input type="hidden" id="update-CodigoProducto" name="CodigoProducto" required><br><br>
 
-            <label for="update-Cantidad">Cantidad:</label>
-            <input type="number" id="update-Cantidad" name="Cantidad" required><br><br>
+                <label for="update-Nombre">Nombre:</label>
+                <input type="text" id="update-Nombre" name="Nombre" required><br><br>
 
-            <label for="update-PrecioUnitario">Precio Unitario:</label>
-            <input type="number" id="update-PrecioUnitario" name="PrecioUnitario" required><br><br>
+                <label for="update-Cantidad">Cantidad:</label>
+                <input type="number" id="update-Cantidad" name="Cantidad" required><br><br>
 
-            <label for="update-Total">Total:</label>
-            <input type="number" id="update-Total" name="Total" required><br><br>
+                <label for="update-PrecioUnitario">Precio Unitario:</label>
+                <input type="number" id="update-PrecioUnitario" name="PrecioUnitario" required><br><br>
 
-            <button type="submit">Actualizar</button>
-            <button type="button" onclick="toggleModal('update-form-modal')">Cancelar</button>
+                <label for="update-Total">Total:</label>
+                <input type="number" id="update-Total" name="Total" required><br><br>
+
+                <div class="envio">
+                    <button type="submit">Actualizar</button>
+                    <button type="button" onclick="toggleModal('update-form-modal')">Cancelar</button>
+                </div>
+            </div>
         </form>
     </div>
 

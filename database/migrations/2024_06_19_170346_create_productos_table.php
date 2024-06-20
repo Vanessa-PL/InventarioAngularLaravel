@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    //El nombre de la base de datos es inventario.
+
     /**
      * Run the migrations.
      */
